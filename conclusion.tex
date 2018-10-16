@@ -1,0 +1,28 @@
+\section{Conclusion}
+	In this paper we have established an algorithm and methodology to address confounding factors in a dataset as well as to mitigate performance degradation and further inequity when establishing subgroup constraints in a machine learning problem.  The solution proposed in this paper utilizing softer tailored subgroup optimization performance constraints is appropriate for problems with multiple  fixed sensitive variables that demonstrate differing sampling population statistics in terms of prevalence, accuracy etc.  As demonstrated in the toy dataset experiments, the proposed methodology will not degrade performance in terms of accuracy for datasets that do not demonstrate the edge-cases described. In fact, we demonstrated a substantial increase in global accuracy and individual subgroup accuracy as compared to existing proposed fairness algorithms. \par
+    
+However, we note two potential concerns with the approach:
+\begin{itemize}
+	\item \textbf{Scaling Sensitive Variables and Confounding Factors}  The algorithm requires a thorough analysis of individual subgroup population combinations or apriori knowledge.  This will increase exponential with the number of assigned sensitive variables and/or possibly identified confounding variables.  Similarly, multiple variables will greatly increase the initial pre-processing and evaluation time.
+ 	\item \textbf{Subgroup Sample Size} The paper's approach is predicated on examining the individual subgroup populations. As the number of variables grow, the sample size  required for these population in order to establish optimal statistics may not be possible. For example, it is within reason, to consider a scenario where a subgroup can be reduced to a possible sample size of 1. This scenario is not addressed in this paper, but is of considerable importance when exploring sensitive variable constraints in ML as applied in policy decisions.  
+\end{itemize}
+
+In future work, we hope to explore subgroup sample population bounds as a possible aid in establishing fairness requirements at a policy level.
+
+%\pagebreak
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

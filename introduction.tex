@@ -1,0 +1,31 @@
+\section{Introduction}
+
+With an increased awareness of the potential for machine learning models to inadvertently amplify existing societal biases \cite{BolukbasiCZSK16a}, standards of ensuring fairness and accountability have been recently under discussion in academia, private technology companies and government institutions.  As illustrated in numerous papers including \cite{Liu2018}, the choice of model can result in drastically different impacts for subgroup populations \cite{Burke2017MultisidedFF}.  Similarly, sampling biases - either due to underlying population traits or varied subgroup population prevalence - can be grossly exaggerated in a learning classifier's output if not singularly expressed in the optimization model such as cited in \cite{Zhao2017MenAL}.
+\par
+Given the potential repercussions of automated tools, policy is being considered in some domains to mitigate issues of inequity. For example, in 2017 New York City introduced a bill to examine the city's *automated decision making systems* with the expressed intent of expressing transparency in algorithmic decisions \cite{NYCLaw}.  In light of these developments, the authors suggest that standards and methodologies for evaluating fairness in common edge cases scenarios are also needed as pre-requisites for potential policy decisions\cite{Adler2018, Ribeiro2016, Feldman2014}.   
+\par
+
+A common approach in fairness aware algorithms with pre-defined sensitive variables, is to set explicit sensitive variable constraints via Lagrangian relaxation enforcing a given fairness metric \cite{Menon2018TheCO}, \cite{Liu2018} etc.  However, previous work \cite{Menon2018TheCO} has established that forcing equality in the constraints is not possible unless the underlying sensitive variable subpopulations demonstrate perfect accuracy with respect to the target.  Furthermore, fairness constraints with a relaxation parameter will often result in a degradation in performance.
+A separate concern is that many constraint based approaches have been implemented only in scenarios where a single sensitive variable exists and may not scale in real-world datasets where multiple subpopulations may need to be treated as *sensitive*.  In situations where multiple sensitive variables exist, there is a concern that utilizing a constrained fairness metric, such as the Equality of Odds that is referenced in this paper, will limit overall performance with an upper bound of accuracy set to the worst performing subpopulation.  
+\par
+Finally, hard (or soft constraints) with respect to a sensitive variable, may be inappropriate without apriori knowledge of the causal model.  In the famous Simpson's paradox found with the 1973 U.C. Berkley admissions data \cite{BerkeleyBias}, raw admissions data suggested a strong bias towards men.  However, a more thorough analysis by student major showed no discrepancy between genders. In fact the major was a confounding variable: men applied at higher rates to the easier departments in terms of acceptance. It is entirely plausible that in this scenario gender would be treated as a sensitive variable.  A global hard constraint on the sensitive variable in a classification problem would  produce noticeably different results than an algorithm optimized with the sensitive variable conditioned on major. The right approach in each scenario requires domain experts.  However, identifying potential confounding factors with respect to sensitive variables in a dataset may be an essential step in not compounding inequity \cite{Chiappa2018}. 
+
+This paper explores the inherent trade-offs of implementing subgroup fairness via the lens of sensitive variable causality, confounding and resolving factors.  The authors posit that a metric definition of fairness using defined sensitive variables should also include:  
+
+\begin{itemize}
+\item Scaling for multiple sensitive variables
+\item Addressing the influence of confounding variables via both bias exposing and resolving factors on sensitive variables
+\item Metrics evaluating subgroup performance both with respect to causal relations and independent of population prevalence
+\item Sample size requirements for subgroup populations 
+\item Domain expert evaluation of fairness interpretation
+\end{itemize}
+
+In exploring these points we find that with an increase in the number of sensitive variables and a corresponding explosion in the dimensionality of subgroups, strict enforcement of fairness criteria may not be possible for specific joint data distributions of sensitive and non-sensitive variables. In such scenarios, we propose a softer constraint based on Pareto-efficiency \cite{Godfrey2007} which scales well with an increase in the number of subgroups. We highlight the utility of Pareto-Efficient Subgroup fairness in simple synthetic toy examples. Finally, we demonstrate that such trade-offs do exist in a real world problem consisting of the UCI Census dataset \cite{Dua:2017}.  Our proposed bias loss solution achieves Pareto-efficient performance which we argue is superior to the existing methods of equalizing loss both in terms of global and subgroup metrics. 
+
+% \cite{Zhao2017MenAL}
+% ~\cite{Menon2018TheCO}
+% ~\cite{Kearns2017PreventingFG}
+% ~\cite{Burke2017MultisidedFF}
+% ~\cite{Beutel2017DataDA}
+% ~\cite{Kleinberg2017PlanningWM}
+% ~\cite{Raghavan2018TheEO}
